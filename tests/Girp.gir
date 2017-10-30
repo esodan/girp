@@ -1,0 +1,296 @@
+<?xml version="1.0"?>
+<repository version="1.2" xmlns="http://www.gtk.org/introspection/core/1.0" xmlns:c="http://www.gtk.org/introspection/c/1.0" xmlns:glib="http://www.gtk.org/introspection/glib/1.0">
+<include name="GXml" version="0.16"/>
+<package name="girp-0.2"/>
+<c:include name="girp.h"/>
+<namespace name="Girp" version="0.2" c:prefix="Girp">
+	<attribute name="ccode.gir-version" value="0.2"/>
+	<attribute name="ccode.cheader-filename" value="girp.h"/>
+	<attribute name="ccode.gir-namespace" value="Girp"/>
+	<class name="Repository" c:type="GirpRepository" glib:type-name="GirpRepository" glib:get-type="girp_repository_get_type" glib:type-struct="RepositoryClass" parent="GXml.GomElement">
+		<field name="parent_instance">
+			<type name="GXml.GomElement" c:type="GXmlGomElement"/>
+		</field>
+		<field name="priv">
+			<type name="RepositoryPrivate" c:type="GirpRepositoryPrivate*"/>
+		</field>
+		<constructor name="new" c:identifier="girp_repository_new">
+			<return-value transfer-ownership="full">
+				<type name="Girp.Repository" c:type="GirpRepository*"/>
+			</return-value>
+		</constructor>
+		<property name="version" writable="1">
+			<attribute name="description.nick" value="::version"/>
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_version" c:identifier="girp_repository_get_version">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+		<method name="set_version" c:identifier="girp_repository_set_version">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="utf8" c:type="const gchar*"/>
+				</parameter>
+			</parameters>
+		</method>
+	</class>
+	<record name="RepositoryClass" c:type="GirpRepositoryClass" glib:is-gtype-struct-for="Repository">
+		<field name="parent_class">
+			<type name="GXml.GomElementClass" c:type="GXmlGomElementClass"/>
+		</field>
+	</record>
+	<record name="RepositoryPrivate" c:type="GirpRepositoryPrivate" disguised="1"/>
+	<class name="Include" c:type="GirpInclude" glib:type-name="GirpInclude" glib:get-type="girp_include_get_type" glib:type-struct="IncludeClass" parent="GXml.GomElement">
+		<field name="parent_instance">
+			<type name="GXml.GomElement" c:type="GXmlGomElement"/>
+		</field>
+		<field name="priv">
+			<type name="IncludePrivate" c:type="GirpIncludePrivate*"/>
+		</field>
+		<constructor name="new" c:identifier="girp_include_new">
+			<return-value transfer-ownership="full">
+				<type name="Girp.Include" c:type="GirpInclude*"/>
+			</return-value>
+		</constructor>
+		<property name="name" writable="1">
+			<attribute name="description.nick" value="::name"/>
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_name" c:identifier="girp_include_get_name">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+		<method name="set_name" c:identifier="girp_include_set_name">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="utf8" c:type="const gchar*"/>
+				</parameter>
+			</parameters>
+		</method>
+		<property name="version" writable="1">
+			<attribute name="description.nick" value="::version"/>
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_version" c:identifier="girp_include_get_version">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+		<method name="set_version" c:identifier="girp_include_set_version">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="utf8" c:type="const gchar*"/>
+				</parameter>
+			</parameters>
+		</method>
+	</class>
+	<record name="IncludeClass" c:type="GirpIncludeClass" glib:is-gtype-struct-for="Include">
+		<field name="parent_class">
+			<type name="GXml.GomElementClass" c:type="GXmlGomElementClass"/>
+		</field>
+	</record>
+	<record name="IncludePrivate" c:type="GirpIncludePrivate" disguised="1"/>
+	<class name="CInclude" c:type="GirpCInclude" glib:type-name="GirpCInclude" glib:get-type="girp_cinclude_get_type" glib:type-struct="CIncludeClass" parent="GXml.GomElement">
+		<field name="parent_instance">
+			<type name="GXml.GomElement" c:type="GXmlGomElement"/>
+		</field>
+		<field name="priv">
+			<type name="CIncludePrivate" c:type="GirpCIncludePrivate*"/>
+		</field>
+		<constructor name="new" c:identifier="girp_cinclude_new">
+			<return-value transfer-ownership="full">
+				<type name="Girp.CInclude" c:type="GirpCInclude*"/>
+			</return-value>
+		</constructor>
+		<property name="name" writable="1">
+			<attribute name="description.nick" value="::name"/>
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_name" c:identifier="girp_cinclude_get_name">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+		<method name="set_name" c:identifier="girp_cinclude_set_name">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="utf8" c:type="const gchar*"/>
+				</parameter>
+			</parameters>
+		</method>
+	</class>
+	<record name="CIncludeClass" c:type="GirpCIncludeClass" glib:is-gtype-struct-for="CInclude">
+		<field name="parent_class">
+			<type name="GXml.GomElementClass" c:type="GXmlGomElementClass"/>
+		</field>
+	</record>
+	<record name="CIncludePrivate" c:type="GirpCIncludePrivate" disguised="1"/>
+	<class name="Namespace" c:type="GirpNamespace" glib:type-name="GirpNamespace" glib:get-type="girp_namespace_get_type" glib:type-struct="NamespaceClass" parent="GXml.GomElement">
+		<field name="parent_instance">
+			<type name="GXml.GomElement" c:type="GXmlGomElement"/>
+		</field>
+		<field name="priv">
+			<type name="NamespacePrivate" c:type="GirpNamespacePrivate*"/>
+		</field>
+		<constructor name="new" c:identifier="girp_namespace_new">
+			<return-value transfer-ownership="full">
+				<type name="Girp.Namespace" c:type="GirpNamespace*"/>
+			</return-value>
+		</constructor>
+		<property name="name" writable="1">
+			<attribute name="description.nick" value="::name"/>
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_name" c:identifier="girp_namespace_get_name">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+		<method name="set_name" c:identifier="girp_namespace_set_name">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="utf8" c:type="const gchar*"/>
+				</parameter>
+			</parameters>
+		</method>
+		<property name="version" writable="1">
+			<attribute name="description.nick" value="::version"/>
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_version" c:identifier="girp_namespace_get_version">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+		<method name="set_version" c:identifier="girp_namespace_set_version">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="utf8" c:type="const gchar*"/>
+				</parameter>
+			</parameters>
+		</method>
+		<property name="prefix" writable="1">
+			<attribute name="description.nick" value="::c:prefix"/>
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_prefix" c:identifier="girp_namespace_get_prefix">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+		<method name="set_prefix" c:identifier="girp_namespace_set_prefix">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="utf8" c:type="const gchar*"/>
+				</parameter>
+			</parameters>
+		</method>
+	</class>
+	<record name="NamespaceClass" c:type="GirpNamespaceClass" glib:is-gtype-struct-for="Namespace">
+		<field name="parent_class">
+			<type name="GXml.GomElementClass" c:type="GXmlGomElementClass"/>
+		</field>
+	</record>
+	<record name="NamespacePrivate" c:type="GirpNamespacePrivate" disguised="1"/>
+	<class name="Class" c:type="GirpClass" glib:type-name="GirpClass" glib:get-type="girp_class_get_type" glib:type-struct="ClassClass" parent="GXml.GomElement">
+		<field name="parent_instance">
+			<type name="GXml.GomElement" c:type="GXmlGomElement"/>
+		</field>
+		<field name="priv">
+			<type name="ClassPrivate" c:type="GirpClassPrivate*"/>
+		</field>
+		<constructor name="new" c:identifier="girp_class_new">
+			<return-value transfer-ownership="full">
+				<type name="Girp.Class" c:type="GirpClass*"/>
+			</return-value>
+		</constructor>
+		<property name="name" writable="1">
+			<attribute name="description.nick" value="::name"/>
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_name" c:identifier="girp_class_get_name">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+		<method name="set_name" c:identifier="girp_class_set_name">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="utf8" c:type="const gchar*"/>
+				</parameter>
+			</parameters>
+		</method>
+		<property name="version" writable="1">
+			<attribute name="description.nick" value="::version"/>
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_version" c:identifier="girp_class_get_version">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+		<method name="set_version" c:identifier="girp_class_set_version">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="utf8" c:type="const gchar*"/>
+				</parameter>
+			</parameters>
+		</method>
+		<property name="prefix" writable="1">
+			<attribute name="description.nick" value="::c:prefix"/>
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_prefix" c:identifier="girp_class_get_prefix">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+		<method name="set_prefix" c:identifier="girp_class_set_prefix">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="utf8" c:type="const gchar*"/>
+				</parameter>
+			</parameters>
+		</method>
+	</class>
+	<record name="ClassClass" c:type="GirpClassClass" glib:is-gtype-struct-for="Class">
+		<field name="parent_class">
+			<type name="GXml.GomElementClass" c:type="GXmlGomElementClass"/>
+		</field>
+	</record>
+	<record name="ClassPrivate" c:type="GirpClassPrivate" disguised="1"/>
+</namespace>
+</repository>
