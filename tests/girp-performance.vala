@@ -26,6 +26,7 @@ class GirpTest.Suite : Object
   {
     GLib.Intl.setlocale (GLib.LocaleCategory.ALL, "");
     Test.init (ref args);
+    ulong tms;
     Test.add_func ("/girp/performance/gio",
     ()=>{
       try {
@@ -38,9 +39,13 @@ class GirpTest.Suite : Object
         gir.read_from_file (f);
         t.stop ();
         t.elapsed (out microseconds);
-        message ("Parsed. Time: %lu".printf (microseconds/1000));
+        message ("Parsed. Time (ms): %lu".printf (microseconds/1000));
       } catch (GLib.Error e) { warning ("Error: "+e.message); }
     });
-    return Test.run ();
+    var tt = new Timer ();
+    var res = Test.run ();
+    tt.elapsed (out tms);
+    message ("Parsed. Time (ms): %lu".printf (tms/1000));
+    return res;
   }
 }

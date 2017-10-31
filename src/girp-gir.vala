@@ -27,14 +27,16 @@
     public Namespace ns { get; set; }
 
     construct {
-      initialize ("repository");
-      set_attribute_ns ("http://www.w3.org/2000/xmlns",
-                      "xmlns", "http://www.gtk.org/introspection/core/1.0");
-      set_attribute_ns ("http://www.w3.org/2000/xmlns",
-                      "xmlns:c", "http://www.gtk.org/introspection/c/1.0");
-      set_attribute_ns ("http://www.w3.org/2000/xmlns",
-                        "xmlns:glib", "http://www.gtk.org/introspection/glib/1.0");
-      version = "1.2";
+      try {
+        initialize ("repository");
+        set_attribute_ns ("http://www.w3.org/2000/xmlns",
+                        "xmlns", "http://www.gtk.org/introspection/core/1.0");
+        set_attribute_ns ("http://www.w3.org/2000/xmlns",
+                        "xmlns:c", "http://www.gtk.org/introspection/c/1.0");
+        set_attribute_ns ("http://www.w3.org/2000/xmlns",
+                          "xmlns:glib", "http://www.gtk.org/introspection/glib/1.0");
+        version = "1.2";
+      } catch (GLib.Error e) { warning ("Error: "+e.message); }
     }
  }
 
@@ -77,8 +79,11 @@
         return _classes;
       }
       set {
-        if (_classes != null)
-          clean_property_elements ("classes");
+        if (_classes != null) {
+          try {
+            clean_property_elements ("classes");
+          } catch (GLib.Error e) { warning ("Error: "+e.message); }
+        }
         _classes = value;
       }
     }
@@ -90,15 +95,20 @@
         return _interfaces;
       }
       set {
-        if (_interfaces != null)
-          clean_property_elements ("interfaces");
+        if (_interfaces != null) {
+          try {
+            clean_property_elements ("interfaces");
+          } catch (GLib.Error e) { warning ("Error: "+e.message); }
+        }
         _interfaces = value;
       }
     }
     construct {
-      initialize ("namespace");
-      _classes = new Class.Map ();
-      _classes.initialize_element (this);
+      try {
+        initialize ("namespace");
+        _classes = new Class.Map ();
+        _classes.initialize_element (this);
+      } catch (GLib.Error e) { warning ("Error: "+e.message); }
     }
  }
  public class Girp.GObject : GomElement, MappeableElement
@@ -114,7 +124,7 @@
     [Description (nick="::glib:type-struct")]
     public string type_struct { get; set; }
     [Description (nick="::parent")]
-    public string parent { get; set; }
+    public string giparent { get; set; }
     public Doc doc { get; set; }
 
 
@@ -126,8 +136,11 @@
         return _properties;
       }
       set {
-        if (_properties != null)
-          clean_property_elements ("properties");
+        if (_properties != null) {
+          try {
+            clean_property_elements ("properties");
+          } catch (GLib.Error e) { warning ("Error: "+e.message); }
+        }
         _properties = value;
       }
     }
@@ -140,8 +153,11 @@
         return _methods;
       }
       set {
-        if (_methods != null)
-          clean_property_elements ("methods");
+        if (_methods != null) {
+          try {
+            clean_property_elements ("methods");
+          } catch (GLib.Error e) { warning ("Error: "+e.message); }
+        }
         _methods = value;
       }
     }
@@ -153,8 +169,11 @@
         return _functions;
       }
       set {
-        if (_functions != null)
-          clean_property_elements ("functions");
+        if (_functions != null) {
+          try {
+            clean_property_elements ("functions");
+          } catch (GLib.Error e) { warning ("Error: "+e.message); }
+        }
         _functions = value;
       }
     }
@@ -167,13 +186,16 @@
  public class Girp.Interface : GObject
  {
     construct {
-      initialize ("interface");
+      try {
+        initialize ("interface");
+      } catch (GLib.Error e) { warning ("Error: "+e.message); }
     }
 
-    public string get_map_key () { return name; }
     public class Map : GomHashMap {
       construct {
-        initialize (typeof (Girp.Interface));
+        try {
+          initialize (typeof (Girp.Interface));
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
       }
     }
  }
@@ -182,11 +204,11 @@
     construct {
       initialize ("class");
     }
-
-    public string get_map_key () { return name; }
     public class Map : GomHashMap {
       construct {
-        initialize (typeof (Girp.Class));
+        try {
+          initialize (typeof (Girp.Class));
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
       }
     }
  }
@@ -221,7 +243,9 @@
 
     public class Map : GomHashMap {
       construct {
-        initialize (typeof (Girp.Property));
+        try {
+          initialize (typeof (Girp.Property));
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
       }
     }
     public string get_map_key () { return name; }
@@ -229,36 +253,48 @@
  public class Girp.Method : MethodCommon
  {
     construct {
-      initialize ("method");
+      try {
+        initialize ("method");
+      } catch (GLib.Error e) { warning ("Error: "+e.message); }
     }
 
     public class Map : GomHashMap {
       construct {
-        initialize (typeof (Girp.Method));
+        try {
+          initialize (typeof (Girp.Method));
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
       }
     }
  }
  public class Girp.Function : MethodCommon
  {
     construct {
-      initialize ("function");
+      try {
+        initialize ("function");
+      } catch (GLib.Error e) { warning ("Error: "+e.message); }
     }
 
     public class Map : GomHashMap {
       construct {
-        initialize (typeof (Girp.Function));
+        try {
+          initialize (typeof (Girp.Function));
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
       }
     }
  }
  public class Girp.Constructor : MethodCommon
  {
     construct {
-      initialize ("constructor");
+      try {
+        initialize ("constructor");
+      } catch (GLib.Error e) { warning ("Error: "+e.message); }
     }
 
     public class Map : GomHashMap {
       construct {
-        initialize (typeof (Girp.Constructor));
+        try {
+          initialize (typeof (Girp.Constructor));
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
       }
     }
  }
@@ -268,7 +304,9 @@
     public string transfer_ownership { get; set; }
     public ValueType value_type { get; set; }
     construct {
-      initialize ("return-value");
+      try {
+        initialize ("return-value");
+      } catch (GLib.Error e) { warning ("Error: "+e.message); }
     }
  }
  public class Girp.ValueType : GomElement
@@ -291,6 +329,8 @@
       }
     }
     construct {
-      initialize ("doc");
+      try {
+        initialize ("doc");
+      } catch (GLib.Error e) { warning ("Error: "+e.message); }
     }
  }
