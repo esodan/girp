@@ -2,5 +2,9 @@
 <gresources>
   <gresource prefix="/org/gnome/Girp">
     <file>window.ui</file>
+    <file>class-details.ui</file>
+    <file>documentation.ui</file>
+    <file>member-row.ui</file>
+    <file>object.ui</file>
   </gresource>
 </gresources>

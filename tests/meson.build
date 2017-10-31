@@ -19,7 +19,7 @@ files_tests_gir = ([
 tgir = executable('gir_tests', files_tests_gir,
 	vala_args : [],
 	dependencies : [ libgirp_deps, inc_libh_dep, testdirs_dep, inc_rooth_dep],
-	link_with: lib
+	link_with: libgirp
 )
 test ('gir', tgir)
 
@@ -30,6 +30,6 @@ files_tests_performance = ([
 tperf = executable('gir_performance', files_tests_performance,
 	vala_args : [],
 	dependencies : [ libgirp_deps, inc_libh_dep, testdirs_dep, inc_rooth_dep],
-	link_with: lib
+	link_with: libgirp
 )
 test ('performance', tperf)

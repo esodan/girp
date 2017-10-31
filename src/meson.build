@@ -46,7 +46,7 @@ sources = files ([
 inc_libh = include_directories ('.')
 inc_libh_dep = declare_dependency (include_directories : inc_libh)
 
-lib = library(VERSIONED_PROJECT_NAME,
+libgirp = library(VERSIONED_PROJECT_NAME,
 	valasources+sources,
 	version : PROJECT_VERSION,
 	vala_header : PROJECT_NAME+'.h',
@@ -70,7 +70,7 @@ custom_target('typelib',
 		join_paths(meson.current_build_dir(), GIR_NAME)
 	],
 	output: TYPELIB_NAME,
-	depends: lib,
+	depends: libgirp,
 	install: true,
 	install_dir: join_paths(get_option('libdir'), 'girepository-1.0'))
 
