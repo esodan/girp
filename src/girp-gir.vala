@@ -72,6 +72,8 @@ public interface Girp.Named : Object {
   public abstract string name { get; set; }
 }
 
+public interface Girp.Member : Object {}
+
 public class Girp.Namespace : GomElement, Named
 {
   [Description (nick="::name")]
@@ -120,7 +122,7 @@ public class Girp.Namespace : GomElement, Named
     } catch (GLib.Error e) { warning ("Error: "+e.message); }
   }
 }
-public class Girp.GObject : GomElement, Documented, Named, MappeableElement
+public class Girp.GObject : GomElement, Documented, Named, Member, MappeableElement
 {
   [Description (nick="::name")]
   public string name { get; set; }
@@ -220,7 +222,7 @@ public class Girp.Class : GObject
     }
   }
 }
-public class Girp.MethodCommon : GomElement, Named, Documented, MappeableElement
+public class Girp.MethodCommon : GomElement, Named, Documented, Member, MappeableElement
 {
   [Description (nick="::name")]
   public string name { get; set; }
@@ -237,7 +239,7 @@ public class Girp.MethodCommon : GomElement, Named, Documented, MappeableElement
 
   public string get_map_key () { return name; }
 }
-public class Girp.Property : GomElement, MappeableElement
+public class Girp.Property : GomElement, Member, MappeableElement
 {
   [Description (nick="::name")]
   public string name { get; set; }

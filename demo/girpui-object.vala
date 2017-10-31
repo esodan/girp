@@ -42,7 +42,7 @@ public class Girpui.Object : Gtk.Grid {
     if (object == null) return;
     if (object is GObject)
       foreach (DomNode n in (object as DomNode).child_nodes) {
-        if (!(n is GObject)) continue;
+        if (!(n is Member)) continue;
         members.append (n);
       }
   }

@@ -25,13 +25,22 @@ public class GirpApp.Window : Gtk.ApplicationWindow {
   [GtkChild]
   private Gtk.FileChooserButton fchooser;
   [GtkChild]
-  private Gtk.Box box;
+  private Gtk.Box bxns;
+  [GtkChild]
+  private Gtk.Box bxobject;
+  [GtkChild]
+  private Gtk.Stack stack;
+  [GtkChild]
+  private Gtk.Button bback;
 
   private Girpui.Namespace ns;
+  private Girpui.Object object_details;
 
   construct {
     ns = new Girpui.Namespace ();
-    box.add (ns);
+    bxns.add (ns);
+    object_details = new Girpui.Object ();
+    bxobject.add (object_details);
     fchooser.file_set.connect (()=>{
       try {
         var ons = new Girp.Repository ();
@@ -39,6 +48,15 @@ public class GirpApp.Window : Gtk.ApplicationWindow {
         ns.rep = ons;
         ns.update ();
       } catch (GLib.Error e) { warning ("Error: %s".printf (e.message)); }
+    });
+    ns.object_activated.connect ((obj)=>{
+      if (!(obj is GObject)) return;
+      object_details.object = obj as GObject;
+      object_details.update ();
+      stack.visible_child_name = "object";
+    });
+    bback.clicked.connect (()=>{
+      stack.visible_child_name = "namespace";
     });
   }
 

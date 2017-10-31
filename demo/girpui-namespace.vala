@@ -31,13 +31,24 @@ public class Girpui.Namespace : Gtk.Grid {
 
   public Girp.Repository rep { get; set; }
 
+  public signal void object_activated (GLib.Object obj);
+
   construct {
     objects = new GLib.ListStore (typeof (GLib.Object));
     lbobjects.bind_model (objects, (obj)=>{
       var w = new ObjectDetails ();
       w.object = obj;
       w.update ();
+      w.show_details.connect (()=>{
+        object_activated (w.object as GLib.Object);
+      });
       return w;
+    });
+    lbobjects.row_activated.connect ((row)=>{
+      var o = row.get_child () as Girpui.ObjectDetails;
+      if (o == null) return;
+      if (o.object == null) return;
+      object_activated (o);
     });
   }
   public void update () {

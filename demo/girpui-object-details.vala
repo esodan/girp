@@ -24,24 +24,15 @@ public class Girpui.ObjectDetails : Gtk.Grid {
   [GtkChild]
   private Gtk.Label lname;
   [GtkChild]
-  private Gtk.ToggleButton tbdetails;
-  [GtkChild]
-  private Gtk.Revealer rdetails;
-  [GtkChild]
-  private Gtk.Box box;
-
-  private Girpui.Object wobject;
+  private Gtk.Button bdetails;
 
   public GLib.Object object { get; set; }
 
+  public signal void show_details ();
+
   construct {
-    wobject = new Girpui.Object ();
-    box.add (wobject);
-    tbdetails.clicked.connect (()=>{
-      if (tbdetails.active)
-        rdetails.reveal_child = true;
-      else
-        rdetails.reveal_child = false;
+    bdetails.clicked.connect (()=>{
+      show_details ();
     });
   }
   public void update () {
@@ -51,9 +42,5 @@ public class Girpui.ObjectDetails : Gtk.Grid {
       if ((object as Named).name != null)
         lname.label = (object as Named).name;
     }
-    rdetails.reveal_child = false;
-    if (!(object is GObject)) return;
-    wobject.object = object as GObject;
-    wobject.update ();
   }
 }
