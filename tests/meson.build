@@ -12,13 +12,24 @@ configure_file (input: 'Gio-2.0.gir',
 		output: 'Gio-2.0.gir',
 		configuration: conf)
 
-files_tests = ([
+files_tests_gir = ([
 		'girp-gir-test.vala'
 	])
 
-tgir = executable('gir_tests', files_tests,
+tgir = executable('gir_tests', files_tests_gir,
 	vala_args : [],
 	dependencies : [ libgirp_deps, inc_libh_dep, testdirs_dep, inc_rooth_dep],
 	link_with: lib
 )
 test ('gir', tgir)
+
+files_tests_performance = ([
+		'girp-performance.vala'
+	])
+
+tperf = executable('gir_performance', files_tests_performance,
+	vala_args : [],
+	dependencies : [ libgirp_deps, inc_libh_dep, testdirs_dep, inc_rooth_dep],
+	link_with: lib
+)
+test ('performance', tperf)

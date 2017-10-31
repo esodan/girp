@@ -158,6 +158,9 @@
         _functions = value;
       }
     }
+    construct {
+      parse_children = false;
+    }
 
     public string get_map_key () { return name; }
  }
@@ -198,6 +201,10 @@
     public ReturnValue return_value { get; set; }
     public Doc doc { get; set; }
 
+    construct {
+      parse_children = false;
+    }
+
     public string get_map_key () { return name; }
  }
  public class Girp.Property : GomElement, MappeableElement
@@ -209,6 +216,7 @@
     public ValueType value_type { get; set; }
     construct {
       initialize ("property");
+      parse_children = false;
     }
 
     public class Map : GomHashMap {

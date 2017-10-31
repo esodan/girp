@@ -51,7 +51,7 @@ class GirpTest.Suite : Object
         var m1 = app.methods.get_item (0) as Girp.Method;
         assert (m1 != null);
         message (app.name+":"+m1.name);
-        warning (m1.doc.text);
+        message (m1.doc.text);
       } catch (GLib.Error e) { warning ("Error: "+e.message); }
     });
     return Test.run ();
