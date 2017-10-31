@@ -1,5 +1,5 @@
 /* -*- Mode: vala; indent-tabs-mode: nil; c-basic-offset: 2; tab-width: 2 -*- */
-/* window.vala
+/* girpui-class-details.vala
  *
  * Copyright (C) 2017 PWMC Services
  *
@@ -20,29 +20,36 @@
 using Girp;
 using GXml;
 
-[GtkTemplate (ui = "/org/gnome/Girp/window.ui")]
-public class GirpApp.Window : Gtk.ApplicationWindow {
+[GtkTemplate (ui = "/org/gnome/Girp/namespace.ui")]
+public class Girpui.Namespace : Gtk.Grid {
   [GtkChild]
-  private Gtk.FileChooserButton fchooser;
+  private Gtk.Entry ename;
   [GtkChild]
-  private Gtk.Box box;
+  private Gtk.ListBox lbobjects;
 
-  private Girpui.Namespace ns;
+  private GLib.ListStore objects;
+
+  public Girp.Repository rep { get; set; }
 
   construct {
-    ns = new Girpui.Namespace ();
-    box.add (ns);
-    fchooser.file_set.connect (()=>{
-      try {
-        var ons = new Girp.Repository ();
-        ons.read_from_file (fchooser.get_file ());
-        ns.rep = ons;
-        ns.update ();
-      } catch (GLib.Error e) { warning ("Error: %s".printf (e.message)); }
+    objects = new GLib.ListStore (typeof (GLib.Object));
+    lbobjects.bind_model (objects, (obj)=>{
+      var w = new ObjectDetails ();
+      w.object = obj;
+      w.update ();
+      return w;
     });
   }
-
-  public Window (Gtk.Application app) {
-    Object (application: app);
+  public void update () {
+    ename.text = "";
+    objects.remove_all ();
+    if (rep == null) return;
+    if (rep.ns == null) return;
+    if (rep.ns.name != null)
+      ename.text = rep.ns.name;
+    foreach (DomNode n in rep.ns.child_nodes) {
+      if (!(n is Girp.GObject)) continue;
+      objects.append (n);
+    }
   }
 }

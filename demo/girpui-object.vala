@@ -18,8 +18,9 @@
  */
 
 using Girp;
+using GXml;
 
-[GtkTemplate (ui = "/org/gnome/Girp/class-details.ui")]
+[GtkTemplate (ui = "/org/gnome/Girp/object.ui")]
 public class Girpui.Object : Gtk.Grid {
   [GtkChild]
   private Gtk.ListBox lbdetails;
@@ -27,15 +28,9 @@ public class Girpui.Object : Gtk.Grid {
   private GLib.ListStore members;
 
   public Girp.GObject object { get; set; }
+
   construct {
-    lname = "";
-    tbdetails.clicked.connect (()=>{
-      if (tbdetails.active)
-        rdetails.child_revealed = true;
-      else
-        rdetails.child_revealed = false;
-    });
-    members = new GLib.ListStore (typeof (Object));
+    members = new GLib.ListStore (typeof (GLib.Object));
     lbdetails.bind_model (members, (obj)=>{
       var w = new MemberRow ();
       w.object = obj;
@@ -44,14 +39,12 @@ public class Girpui.Object : Gtk.Grid {
     });
   }
   public void update () {
-    try {
-      if (object == null) return;
-      if (object is Named) {
-        if ((object as Named).name != null)
-          lname.label = object.name;
+    if (object == null) return;
+    if (object is GObject)
+      foreach (DomNode n in (object as DomNode).child_nodes) {
+        if (!(n is GObject)) continue;
+        members.append (n);
       }
-      rdetails.child_revealed = false;
-    } catch (GLib.Error e) { warning ("Error: %s").printf (e.message); }
   }
 }
 
@@ -68,25 +61,30 @@ public class Girpui.MemberRow : Gtk.Grid {
 
   private Girpui.Doc doc;
 
-  public Object object { get; set; }
+  public GLib.Object object { get; set; }
 
   construct {
     doc = new Girpui.Doc ();
     pdoc.add (doc);
+    bmember.clicked.connect (()=>{
+      pdoc.popup ();
+    });
   }
 
   public void update () {
-    try {
-      if (object == null) return;
-      if (object is Girp.Named) {
-        var go = object as Girp.Named;
-        if (go.name != null)
-          lname.label = go.name;
-      }
-      if (object is Girp.Documented) {
-        doc.doc = (object as Documented).doc;
-        doc.update ();
-      }
-    } catch (GLib.Error e) { warning ("Error: %s").printf (e.message); }
+    if (object == null) return;
+    if (object is GObject) {
+      // FIXME: Choose a correct icon for object
+      image.icon_name = "gtk-convert";
+    }
+    if (object is Girp.Named) {
+      var go = object as Girp.Named;
+      if (go.name != null)
+        lname.label = go.name;
+    }
+    if (object is Girp.Documented) {
+      doc.doc = (object as Documented).doc;
+      doc.update ();
+    }
   }
 }

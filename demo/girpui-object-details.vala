@@ -19,7 +19,7 @@
 
 using Girp;
 
-[GtkTemplate (ui = "/org/gnome/Girp/class-details.ui")]
+[GtkTemplate (ui = "/org/gnome/Girp/object-details.ui")]
 public class Girpui.ObjectDetails : Gtk.Grid {
   [GtkChild]
   private Gtk.Label lname;
@@ -32,25 +32,28 @@ public class Girpui.ObjectDetails : Gtk.Grid {
 
   private Girpui.Object wobject;
 
-  public Girp.GObject object { get; set; }
+  public GLib.Object object { get; set; }
+
   construct {
-    lname = "";
     wobject = new Girpui.Object ();
     box.add (wobject);
     tbdetails.clicked.connect (()=>{
       if (tbdetails.active)
-        rdetails.child_revealed = true;
+        rdetails.reveal_child = true;
       else
-        rdetails.child_revealed = false;
+        rdetails.reveal_child = false;
     });
   }
   public void update () {
-    try {
-      if (object == null) return;
-      lname.label = object.name;
-      rdetails.child_revealed = false;
-      wobject.object = object;
-      wobject.update ();
-    } catch (GLib.Error e) { warning ("Error: %s").printf (e.message); }
+    lname.label = "";
+    if (object == null) return;
+    if (object is Named) {
+      if ((object as Named).name != null)
+        lname.label = (object as Named).name;
+    }
+    rdetails.reveal_child = false;
+    if (!(object is GObject)) return;
+    wobject.object = object as GObject;
+    wobject.update ();
   }
 }

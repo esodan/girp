@@ -2,6 +2,7 @@ girp_sources = [
   'main.vala',
   'window.vala',
   'girpui-doc.vala',
+  'girpui-namespace.vala',
   'girpui-object-details.vala',
   'girpui-object.vala'
 ]
@@ -9,7 +10,8 @@ girp_sources = [
 girp_deps = [
   dependency('gio-2.0', version: '>= 2.50'),
   dependency('gtk+-3.0', version: '>= 3.22'),
-  dependency('gxml-0.16', version: '>= 0.15.2')
+  dependency('gxml-0.16', version: '>= 0.15.2'),
+  inc_libh_dep
 ]
 
 

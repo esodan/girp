@@ -21,7 +21,7 @@ int main (string[] args) {
 	app.activate.connect (() => {
 		var win = app.active_window;
 		if (win == null) {
-			win = new Girp.Window (app);
+			win = new GirpApp.Window (app);
 		}
 		win.present ();
 	});
