@@ -42,10 +42,11 @@ class GirpTest.Suite : Object
         message ("Parsed. Time (ms): %lu".printf (microseconds/1000));
       } catch (GLib.Error e) { warning ("Error: "+e.message); }
     });
+    message ("Test started");
     var tt = new Timer ();
     var res = Test.run ();
     tt.elapsed (out tms);
-    message ("Parsed. Time (ms): %lu".printf (tms/1000));
+    message ("Test done. Time (ms): %lu".printf (tms/1000));
     return res;
   }
 }
