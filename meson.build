@@ -19,6 +19,7 @@ inc_rooth_dep = declare_dependency (include_directories : inc_rooth)
 
 subdir('data')
 subdir('src')
+subdir('demo')
 subdir('po')
 subdir('tests')
 meson.add_install_script('build-aux/meson/postinstall.py')
