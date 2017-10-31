@@ -26,21 +26,32 @@ class GirpTest.Suite : Object
   {
     GLib.Intl.setlocale (GLib.LocaleCategory.ALL, "");
     Test.init (ref args);
-    Test.add_func ("/girp/repository",
+    Test.add_func ("/girp/repository/gio",
     ()=>{
       try {
         var gir = new Girp.Repository ();
-        var f = GLib.File.new_for_path ("tests/Girp.gir");
+        var f = GLib.File.new_for_path ("tests/Gio-2.0.gir");
         message (f.get_path ());
         assert (f.query_exists ());
         gir.read_from_file (f);
         assert (gir.ns != null);
-        assert (gir.ns.name == "Girp");
-        assert (gir.ns.version == "0.2");
-        message (gir.get_attribute ("prefix"));
-        assert (gir.ns.cprefix == "Girp");
+        assert (gir.ns.name == "Gio");
+        assert (gir.ns.version == "2.0");
         assert (gir.ns.classes.length > 0);
-        //warning (gir.write_string ());
+        assert (gir.ns.interfaces.length > 0);
+        var c1 = gir.ns.classes.get_item (0) as Girp.Class;
+        assert (c1 != null);
+        message (c1.name);
+        assert (c1.doc != null);
+        var app = gir.ns.classes.get ("Application") as Girp.Class;
+        assert (app != null);
+        assert (app.functions.length > 0);
+        assert (app.properties.length > 0);
+        assert (app.methods.length > 0);
+        var m1 = app.methods.get_item (0) as Girp.Method;
+        assert (m1 != null);
+        message (app.name+":"+m1.name);
+        warning (m1.doc.text);
       } catch (GLib.Error e) { warning ("Error: "+e.message); }
     });
     return Test.run ();

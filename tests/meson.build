@@ -8,6 +8,10 @@ configure_file (input: 'Girp.gir',
 		output: 'Girp.gir',
 		configuration: conf)
 
+configure_file (input: 'Gio-2.0.gir',
+		output: 'Gio-2.0.gir',
+		configuration: conf)
+
 files_tests = ([
 		'girp-gir-test.vala'
 	])
