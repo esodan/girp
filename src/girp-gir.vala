@@ -239,13 +239,14 @@ public class Girp.MethodCommon : GomElement, Named, Documented, Member, Mappeabl
 
   public string get_map_key () { return name; }
 }
-public class Girp.Property : GomElement, Member, MappeableElement
+public class Girp.Property : GomElement, Named, Documented, Member, MappeableElement
 {
   [Description (nick="::name")]
   public string name { get; set; }
   [Description (nick="::writable")]
   public string writable { get; set; }
   public ValueType value_type { get; set; }
+  public Doc doc { get; set; }
   construct {
     initialize ("property");
     parse_children = false;

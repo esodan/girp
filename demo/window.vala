@@ -42,12 +42,8 @@ public class GirpApp.Window : Gtk.ApplicationWindow {
     object_details = new Girpui.Object ();
     bxobject.add (object_details);
     fchooser.file_set.connect (()=>{
-      try {
-        var ons = new Girp.Repository ();
-        ons.read_from_file (fchooser.get_file ());
-        ns.rep = ons;
-        ns.update ();
-      } catch (GLib.Error e) { warning ("Error: %s".printf (e.message)); }
+
+      load.begin (fchooser.get_file ());
     });
     ns.object_activated.connect ((obj)=>{
       if (!(obj is GObject)) return;
@@ -62,5 +58,14 @@ public class GirpApp.Window : Gtk.ApplicationWindow {
 
   public Window (Gtk.Application app) {
     Object (application: app);
+  }
+
+  private async void load (GLib.File f) {
+    try {
+      var ons = new Girp.Repository ();
+      yield ons.read_from_file_async (fchooser.get_file ());
+      ns.rep = ons;
+      ns.update ();
+    } catch (GLib.Error e) { warning ("Error: %s".printf (e.message)); }
   }
 }

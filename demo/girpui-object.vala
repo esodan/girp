@@ -23,6 +23,8 @@ using GXml;
 [GtkTemplate (ui = "/org/gnome/Girp/object.ui")]
 public class Girpui.Object : Gtk.Grid {
   [GtkChild]
+  private Gtk.Entry ename;
+  [GtkChild]
   private Gtk.ListBox lbdetails;
 
   private GLib.ListStore members;
@@ -39,7 +41,13 @@ public class Girpui.Object : Gtk.Grid {
     });
   }
   public void update () {
+    ename.text = "NoName";
+    members.remove_all ();
     if (object == null) return;
+    if (object is Named) {
+      if ((object as Named).name != null)
+        ename.text = (object as Named).name;
+    }
     if (object is GObject)
       foreach (DomNode n in (object as DomNode).child_nodes) {
         if (!(n is Member)) continue;
@@ -58,6 +66,8 @@ public class Girpui.MemberRow : Gtk.Grid {
   private Gtk.Image image;
   [GtkChild]
   private Gtk.Popover pdoc;
+  [GtkChild]
+  private Gtk.Viewport vp;
 
   private Girpui.Doc doc;
 
@@ -65,15 +75,21 @@ public class Girpui.MemberRow : Gtk.Grid {
 
   construct {
     doc = new Girpui.Doc ();
-    pdoc.add (doc);
+    vp.add (doc);
     bmember.clicked.connect (()=>{
+      if (doc.doc == null) return;
       pdoc.popup ();
     });
   }
 
   public void update () {
+    lname.label = "NoName";
     if (object == null) return;
-    if (object is GObject) {
+    if (object is Method) {
+      // FIXME: Choose a correct icon for object
+      image.icon_name = "gtk-execute";
+    }
+    if (object is Property) {
       // FIXME: Choose a correct icon for object
       image.icon_name = "gtk-convert";
     }

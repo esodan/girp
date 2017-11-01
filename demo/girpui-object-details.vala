@@ -25,6 +25,8 @@ public class Girpui.ObjectDetails : Gtk.Grid {
   private Gtk.Label lname;
   [GtkChild]
   private Gtk.Button bdetails;
+  [GtkChild]
+  private Gtk.Image image;
 
   public GLib.Object object { get; set; }
 
@@ -42,5 +44,6 @@ public class Girpui.ObjectDetails : Gtk.Grid {
       if ((object as Named).name != null)
         lname.label = (object as Named).name;
     }
+    image.icon_name = "gtk-convert"; // FIXME: Set based on type
   }
 }
